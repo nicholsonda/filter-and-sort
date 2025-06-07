@@ -1,0 +1,52 @@
+#{{uc_id}}.uc-sort-filter{
+  	display:flex;
+}
+#{{uc_id}} label{
+  flex-shrink: 0;
+  {% if select_type == "column" %}
+  width:100%;
+  {% endif %}
+}
+
+#{{uc_id}}.uc-sort-filter select{
+  	display:inline-block;
+}
+#{{uc_id}} .uc-sort-filter-orderby-wrapper, #{{uc_id}} .uc-sort-filter-orderdir-wrapper {
+  display:flex;
+  position:relative;
+}
+#{{uc_id}} .orderby-select-wrapper{
+  position:relative;
+}
+
+#{{uc_id}} select{
+ cursor:pointer;
+}
+{% if custom_indicator_icon == "true" %}
+#{{uc_id}} select{
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#{{uc_id}} .ue-sorting-filter_select-indicator{
+	position: absolute;
+  	top: 50%;
+  	transform: translate(0, -50%);
+  	z-index: 1;
+  	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  	pointer-events: none;
+}
+#{{uc_id}} .ue-sorting-filter_select-indicator svg{
+  width:1em;
+  height:1em;
+}
+
+{% endif %}
+
+#{{uc_id}}  .orderby-select-wrapper{
+  width:100%;
+}

@@ -1,0 +1,57 @@
+{% set arrFilterData = ucfunc("get_sort_filter_data",sort_filter_type) %}
+
+<div id="{{uc_id}}" class="uc-grid-filter uc-sort-filter" data-filtertype="general" data-generaltype="sort" data-norefresh="true" {{filter_attributes|raw}}>
+  
+  <div class="uc-sort-filter-orderby-wrapper">
+    {% if show_order_by_label == "true" %}<label id="{{uc_id}}_label_orderby" for="uc-sort-filter-orderby">{{order_by_label_text|raw}}</label>{% endif %}
+   <div class="orderby-select-wrapper">
+    <select id="uc-sort-filter-orderby" class="uc-sort-filter__select" data-type="orderby" data-initval="{{default_selected}}">
+    
+    {% set numoption = 0 %}
+    {% for key in arrFilterData|keys %}
+      	{% set selected = "" %}
+    	{% set numoption = numoption+1 %}
+       	{% if(default_selected == "num_option" and numoption == selected_option_number) %}
+      		
+      		{% set selected = "selected" %}
+      
+      	{% endif%}
+      
+      	<option value="{{key}}" {{selected}}>{{arrFilterData[key]}}</option>
+    {% endfor %}
+    
+    </select>
+    {% if custom_indicator_icon == "true" %}<div class="ue-sorting-filter_select-indicator">{{indicator_icon_html|raw}}</div>{% endif %}
+   </div>
+  </div>
+  {% if(sort_filter_type == "auto") %}
+
+  {% set arrFilterData = ucfunc("get_sort_filter_data","woo") %}
+  
+  <div class="uc-sort-filter__woofill" style="display:none">
+    
+  {% for key in arrFilterData|keys %}
+      	{% set isSelected = "" %}
+      	
+        {% if key == default_selected_dir %}
+      		{% set isSelected = " selected" %}
+      	{% endif %}
+        
+      	<option value="{{key}}" {{isSelected}}>{{arrFilterData[key]}}</option>
+    
+  {% endfor %}
+  </div>
+  
+{% endif %}	
+   <div class="uc-sort-filter-orderdir-wrapper">
+     {% if show_order_dir_label == "true" %}<label id="{{uc_id}}_label_orderdir" for="uc-sort-filter-orderdir">{{order_dir_label_text|raw}}</label>{% endif %}
+    <div class="orderby-select-wrapper">
+     <select id="uc-sort-filter-orderdir" class="uc-sort-filter__select-dir" data-type="orderdir" data-initval="{{default_selected_dir}}" >
+      	<option value="default" {%if default_selected_dir == "default"%}selected{%endif%} >Default</option>
+      	<option value="asc" {%if default_selected_dir == "asc"%}selected{%endif%} >{{ascending_text|raw}}</option>
+      	<option value="desc" {%if default_selected_dir == "desc"%}selected{%endif%} >{{descending_text|raw}}</option>
+     </select>
+     {% if custom_indicator_icon == "true" %}<div class="ue-sorting-filter_select-indicator">{{indicator_icon_html|raw}}</div>{% endif %}
+    </div>
+  </div>
+</div>
